@@ -6,6 +6,7 @@
 package proyectocomplejidad;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import scpsolver.constraints.LinearBiggerThanEqualsConstraint;
 import scpsolver.constraints.LinearSmallerThanEqualsConstraint;
 import scpsolver.lpsolver.LinearProgramSolver;
@@ -30,6 +31,8 @@ public class main {
         proyecto.printEntrada();
         proyecto.crearFuncionObjetivo(proyecto.getTotalArticulosSolicitados());
         proyecto.adicionarRestricciones(proyecto.getTotalArticulosSolicitados());
-        System.out.println(proyecto.obtenerResultado());
+        System.err.println(proyecto.getTotalArticulosSolicitados());
+        proyecto.traducirResultados(proyecto.obtenerResultado(), proyecto.getTotalArticulosSolicitados());
+        System.out.println(Arrays.toString(proyecto.obtenerResultado()));
     }
 }

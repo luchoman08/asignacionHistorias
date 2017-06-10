@@ -83,6 +83,20 @@ public class ProyectoComplejidad {
 
     }
     
+    /**
+     *
+     * @param cantidadArticulos
+     */
+    public void traducirResultados(double[] cantidadArticulosEnCadaContenedor, int mejorNEncontrado){
+        
+        
+        
+        for (int i = 0; i < cantidadArticulosEnCadaContenedor.length; i++) {
+                if(cantidadArticulosEnCadaContenedor[i]> 0)
+                System.out.println("En el contenedor " + Math.ceil(i/cantidadPedidos()) +" se llevan "+ cantidadArticulosEnCadaContenedor[i] +" pedidos de el pedido "+ (i - (this.cantidadPedidos() * Math.ceil(i/cantidadPedidos()))) );
+            }
+    }
+    
     public double[] obtenerResultado(){
         LinearProgramSolver solver  = SolverFactory.newDefault(); 
         double[] sol = solver.solve(this.linearProgram);
@@ -100,7 +114,7 @@ public class ProyectoComplejidad {
             for (int j = 0; j < cantidadPedidos(); j++) {
                 coeficientesRestriccion[i * cantidadPedidos() + j] = this.pedidos.get(j).tamanioUnidad;
             }
-            System.out.println(Arrays.toString(coeficientesRestriccion));
+           // System.out.println(Arrays.toString(coeficientesRestriccion));
             this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, this.capacidadContenedores, "c" + i));
 
         }
@@ -111,10 +125,20 @@ public class ProyectoComplejidad {
             for (int j = 0; j < mejorNEncontrado; j++) {
                 coeficientesRestriccion[i  + j * cantidadPedidos()] = 1;
             }
-            System.out.println(Arrays.toString(coeficientesRestriccion));
-            this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, this.pedidos.get(i).cantidadUnidades, "d" + i));
-            this.linearProgram.addConstraint(new LinearBiggerThanEqualsConstraint(coeficientesRestriccion, this.pedidos.get(i).cantidadUnidades, "d" + i));
+         //   System.out.println(Arrays.toString(coeficientesRestriccion));
+            this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, this.pedidos.get(i).cantidadUnidades, "c" + i));
+            this.linearProgram.addConstraint(new LinearBiggerThanEqualsConstraint(coeficientesRestriccion, this.pedidos.get(i).cantidadUnidades, "c" + i));
+            
         }
+        
+       
+        coeficientesRestriccion = new double[cantidadVariables];
+        for (int i = 0; i < cantidadVariables; i++) {
+          coeficientesRestriccion[i] = 1;
+        }
+        this.linearProgram.addConstraint(new LinearBiggerThanEqualsConstraint(coeficientesRestriccion, 0, "positivos inc el 0"));
+        
+        
 
     }
 
@@ -126,15 +150,27 @@ public class ProyectoComplejidad {
      */
     public void crearFuncionObjetivo(int mejorNEncontrado) {
         double[] coeficientesFuncionObjetivo = new double[cantidadPedidos() * mejorNEncontrado];
+        double[] lowerBound = new double[cantidadPedidos() * mejorNEncontrado];
+        boolean[] restriccionTodosEnteros = new boolean[cantidadPedidos() * mejorNEncontrado];
         for (int i = 0; i < coeficientesFuncionObjetivo.length; i ++) {
-            coeficientesFuncionObjetivo[i] = 1;
+            coeficientesFuncionObjetivo[i] =-( ((int) Math.floor(i / cantidadPedidos()) ) + 1);
+            
+            restriccionTodosEnteros[i] = true;
+             lowerBound[i] = 0;
         }
+        
         System.out.println(Arrays.toString(coeficientesFuncionObjetivo));
+
+      //  System.out.println(Arrays.toString(coeficientesFuncionObjetivo));
+      //la funcion objetivo es minimizar el uso de contenedores 
         linearProgram = new LinearProgram(coeficientesFuncionObjetivo);
+        linearProgram.setIsinteger(restriccionTodosEnteros);
+        linearProgram.setLowerbound(lowerBound);
+        //cada 
     }
 
     public void printEntrada() {
-        System.out.println(capacidadContenedores);
+       // System.out.println(capacidadContenedores);
         for (Pedido pedido : this.pedidos) {
             System.out.println(pedido.cantidadUnidades + " " + pedido.tamanioUnidad);
         }
