@@ -31,8 +31,8 @@ c
 Ej: Asumiendo tres caracteristicas (backend, frontend, ux)  
   
 * Una historia de dificultad media: 5 5 5  
-* Una historia muy facl :  1 1 1  
-* Una historia muy dificil: 10 9 9  
+* Una historia muy fácil :  1 1 1  
+* Una historia muy difícil: 10 9 9  
   
   
 El costo que cada desarrollador tendrá para resolver una historia será máximo de 100x y mínimo de 10x 
