@@ -16,11 +16,11 @@ Luego irá la línea que indica cuantas historias hay
 
 En las siguientes d lineas se describirán las caracteristicas de cada desarrollador, una característica es una habilidad del 0.1 al 1 la cual indica que tan bueno es un desarrollador d en una característica c
 
-Ej: Asumiendo tres caracteristicas (backend, frontend, ux)
-
-  Un desarrollador mediocre: 0.5 0.5 0.5
-  Un desarrollador muy nuevo: 0.1 0.1 0.1
-  Un desarrollador muy habilidoso: 1 1 1 
+Ej: Asumiendo tres caracteristicas (backend, frontend, ux)  
+  
+  Un desarrollador mediocre: 0.5 0.5 0.5  
+  Un desarrollador muy nuevo: 0.1 0.1 0.1  
+  Un desarrollador muy habilidoso: 1 1 1   
 
 Luego habrá una linea de gracia que no tendra otra utilidad que separar las caracteristicas de los desarrolladores de la de las hitorias, esta linea sera escapada al momento de leer los datos y puede llevar cualquier caracter o conjunto de caracteres.
 
@@ -28,13 +28,13 @@ Luego habrá una linea de gracia que no tendra otra utilidad que separar las car
 En las siguientes líneas se describirán las complejidades que cada historia tiene del 0 al 10 sobre una característica
 c
 
-Ej: Asumiendo tres caracteristicas (backend, frontend, ux)
-
-  Una historia de dificultad media: 5 5 5
-  Una historia muy facl :  1 1 1
-  Una historia muy dificil: 10 9 9 
-
-
+Ej: Asumiendo tres caracteristicas (backend, frontend, ux)  
+  
+  Una historia de dificultad media: 5 5 5  
+  Una historia muy facl :  1 1 1  
+  Una historia muy dificil: 10 9 9  
+  
+  
 El costo que cada desarrollador tendrá para resolver una historia será máximo de 100x y mínimo de 10x 
 
 Ej: Asignando la historia muy dificil al desarrollaodr mediocre, el costo correspondiente es el siguiente:
