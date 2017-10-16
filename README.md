@@ -1,10 +1,10 @@
 
 
-Definiciones: 
-x el numero de características
-d el numero de desarrolladores
-h el numero de historias
-6 características
+Definiciones:  
+x el numero de características  
+d el numero de desarrolladores   
+h el numero de historias  
+6 características  
 
 El archvivo de entrada es "entrada.txt"
 
