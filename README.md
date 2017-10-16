@@ -6,7 +6,7 @@ d el numero de desarrolladores
 h el numero de historias  
 6 características  
 
-El archvivo de entrada es "[entrada.txt][1]"
+El archvivo de entrada es "[entrada.txt](https://github.com/luchoman08/asignacionHistorias/master/entrada.txt "entrada")"
 
 El formato será el siguiente:
 
@@ -59,4 +59,4 @@ cada desarrollador
 
 Deberá haber un conjunto de restricciones que trataran de garantizar la equitatividad del numero de puntos 
 asignados a cada desarrollador, un modelo en el cual intervendrá cuanto es el promedio (aún esta en desarrollo)
-[1]: https://github.com/luchoman08/asignacionHistorias/master/entrada.txt
+
