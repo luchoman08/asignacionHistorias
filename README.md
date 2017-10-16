@@ -18,9 +18,9 @@ En las siguientes d lineas se describirán las caracteristicas de cada desarroll
 
 Ej: Asumiendo tres caracteristicas (backend, frontend, ux)  
   
-  Un desarrollador mediocre: 0.5 0.5 0.5  
-  Un desarrollador muy nuevo: 0.1 0.1 0.1  
-  Un desarrollador muy habilidoso: 1 1 1   
+* Un desarrollador mediocre: 0.5 0.5 0.5  
+* Un desarrollador muy nuevo: 0.1 0.1 0.1  
+* Un desarrollador muy habilidoso: 1 1 1   
 
 Luego habrá una linea de gracia que no tendra otra utilidad que separar las caracteristicas de los desarrolladores de la de las hitorias, esta linea sera escapada al momento de leer los datos y puede llevar cualquier caracter o conjunto de caracteres.
 
@@ -30,9 +30,9 @@ c
 
 Ej: Asumiendo tres caracteristicas (backend, frontend, ux)  
   
-  Una historia de dificultad media: 5 5 5  
-  Una historia muy facl :  1 1 1  
-  Una historia muy dificil: 10 9 9  
+* Una historia de dificultad media: 5 5 5  
+* Una historia muy facl :  1 1 1  
+* Una historia muy dificil: 10 9 9  
   
   
 El costo que cada desarrollador tendrá para resolver una historia será máximo de 100x y mínimo de 10x 
