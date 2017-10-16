@@ -1,4 +1,4 @@
-# Descripciones generales de el proyecto, vale decir que este esta en estado de maduración por lo cual todo lo aquí presente esta sujeto a cambios
+### Descripciones generales de el proyecto, vale decir que este esta en estado de maduración por lo cual todo lo aquí presente esta sujeto a cambios
 
 Definiciones:  
 x el numero de características  
