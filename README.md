@@ -6,7 +6,7 @@ d el numero de desarrolladores
 h el numero de historias  
 6 características  
 
-El archvivo de entrada es "[entrada.txt](https://github.com/luchoman08/asignacionHistorias/master/entrada.txt "entrada")"
+El archvivo de entrada es "[entrada.txt](https://github.com/luchoman08/asignacionHistorias/blob/master/entrada.txt "entrada")"
 
 El formato será el siguiente:
 
