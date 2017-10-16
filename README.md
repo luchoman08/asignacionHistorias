@@ -1,5 +1,13 @@
 ### Descripciones generales de el proyecto, vale decir que este esta en estado de maduración por lo cual todo lo aquí presente esta sujeto a cambios
 
+
+Puede descargar el proyecto, abrirlo con netbeans y ejecutarlo directamente, los resultados se imprimen por pantalla, un ejemplo de la salida del programa: 
+
+Al desarrollador 0 se le ha asignado la historia 1  
+Al desarrollador 1 se le ha asignado la historia 2  
+Al desarrollador 3 se le ha asignado la historia 0  
+  
+
 Definiciones:  
 x el numero de características  
 d el numero de desarrolladores   
@@ -8,6 +16,8 @@ h el numero de historias
 
 El archvivo de entrada es "[entrada.txt](https://github.com/luchoman08/asignacionHistorias/blob/master/entrada.txt "entrada")"
 
+Si desea ingresar un input personalizado debera modificar el archivo "entrada.txt", para hacerlo debe comprender el formato que se describe a continuación.
+  
 El formato será el siguiente:
 
 
