@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import scpsolver.constraints.LinearEqualsConstraint;
+
 /**
  *
  * @author invitado
@@ -39,18 +40,15 @@ public class ProyectoAsignacionDesarrolladores {
     public Proyecto proyecto;
     LinearProgram linearProgram;
     LinearProgramSolver solver;
-    
-    public void printMatrix(double[][] matrix){
-    for (int i = 0; i < matrix.length; i++) {
-    for (int j = 0; j < matrix[i].length; j++) {
-        System.out.print(matrix[i][j] + " ");
-    }
-    System.out.println();
-}
-    }
-    
 
-
+    public void printMatrix(double[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     public ProyectoAsignacionDesarrolladores() {
         this.linearProgram = new LinearProgram();
@@ -58,91 +56,88 @@ public class ProyectoAsignacionDesarrolladores {
         this.proyecto = new Proyecto();
     }
 
-     public BufferedReader getBuffered(String link){
+    public BufferedReader getBuffered(String link) {
 
-    FileReader lector  = null;
-    BufferedReader br = null;
-    try {
-         File Arch=new File(link);
-        if(!Arch.exists()){
-           System.out.println("No existe el archivo");
-        }else{
-           lector = new FileReader(link);
-           br = new BufferedReader(lector);
+        FileReader lector = null;
+        BufferedReader br = null;
+        try {
+            File Arch = new File(link);
+            if (!Arch.exists()) {
+                System.out.println("No existe el archivo");
+            } else {
+                lector = new FileReader(link);
+                br = new BufferedReader(lector);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return br;
     }
-    return br;
-}
-    public ArrayList<Double> convertirArrayStringADouble (ArrayList<String> arrString){
+
+    public ArrayList<Double> convertirArrayStringADouble(ArrayList<String> arrString) {
         ArrayList<Double> arrDouble = new ArrayList<>();
-        for(String item: arrString){
+        for (String item : arrString) {
             arrDouble.add(Double.parseDouble(item));
         }
         return arrDouble;
-    } 
+    }
+
     public void leerPedidos(String nombreArchivo) throws FileNotFoundException, IOException {
-               //ruta de tu archivo
+        //ruta de tu archivo
         BufferedReader br = getBuffered(nombreArchivo);
         String auxiliarSplitString[];  //auxiliar para hacer split a los string
         ArrayList<Double> auxiliar_caracteristicas;
         Persona persona = new Persona(); //auxiliar persona de usos varios
-        Historia historia =  new Historia(); //auxiliar historia de usos varios
+        Historia historia = new Historia(); //auxiliar historia de usos varios
         //leemos la primera linea
-        String linea =  br.readLine();
-        
+        String linea = br.readLine();
+
         this.proyecto.numeroDesarroladores = Integer.parseInt(linea);
         System.out.println(this.proyecto.numeroDesarroladores);
-         linea =  br.readLine();
+        linea = br.readLine();
         this.proyecto.numeroHistorias = Integer.parseInt(linea);
         System.out.println(this.proyecto.numeroHistorias);
         this.proyecto.init();
-        for(int i = 0 ; i < this.proyecto.numeroDesarroladores ; i++){
-             linea =  br.readLine();
-            
-             auxiliarSplitString = linea.split(" ");
-             persona.caracteristicas = convertirArrayStringADouble(new ArrayList<>(Arrays.asList(auxiliarSplitString)));
-             this.proyecto.desarrolladores.add(persona);
-             persona = new Persona();
-        }
-        
-        linea =  br.readLine();
-         for(int i = 0 ; i < this.proyecto.numeroHistorias ; i++){
-             linea =  br.readLine();
-             auxiliarSplitString = linea.split(" ");
-             historia.caracteristicas = convertirArrayStringADouble(new ArrayList<>(Arrays.asList(auxiliarSplitString)));
-             proyecto.historias.add(historia);
-             historia= new Historia();
-        }
-         this.proyecto.calcularHabilidadPromedio();
-         this.proyecto.calcularCostoPromedio();
-    }
-    
-    /**
-     *
-     * @param cantidadArticulos
-     */
-    public void traducirResultados(double[] resultados){
-        
-        
-        
         for (int i = 0; i < this.proyecto.numeroDesarroladores; i++) {
-            for(int j = 0; j < this.proyecto.numeroHistorias; j++){
-                
-                if(resultados[i*this.proyecto.numeroHistorias + j]==1)
-               System.out.println("Al desarrollador " + i + " se le ha asignado la historia " + j);    
+            linea = br.readLine();
+
+            auxiliarSplitString = linea.split(" ");
+            persona.caracteristicas = convertirArrayStringADouble(new ArrayList<>(Arrays.asList(auxiliarSplitString)));
+            this.proyecto.desarrolladores.add(persona);
+            persona = new Persona();
+        }
+
+        linea = br.readLine();
+        for (int i = 0; i < this.proyecto.numeroHistorias; i++) {
+            linea = br.readLine();
+            auxiliarSplitString = linea.split(" ");
+            historia.caracteristicas = convertirArrayStringADouble(new ArrayList<>(Arrays.asList(auxiliarSplitString)));
+            proyecto.historias.add(historia);
+            historia = new Historia();
+        }
+        this.proyecto.calcularHabilidadPromedio();
+        this.proyecto.calcularCostoPromedio();
+    }
+
+    public void traducirResultados(double[] resultados) {
+
+        for (int i = 0; i < this.proyecto.numeroDesarroladores; i++) {
+            for (int j = 0; j < this.proyecto.numeroHistorias; j++) {
+
+                if (resultados[i * this.proyecto.numeroHistorias + j] == 1) {
+                    System.out.println("Al desarrollador " + i + " se le ha asignado la historia " + j);
+                }
             }
-            
+
         }
     }
-    
-    public double[] obtenerResultado(){
-        LinearProgramSolver solver  = SolverFactory.newDefault(); 
+
+    public double[] obtenerResultado() {
+        LinearProgramSolver solver = SolverFactory.newDefault();
         double[] sol = solver.solve(this.linearProgram);
         return sol;
     }
-    
+
     public void adicionarRestricciones() {
         /*
         //restricciones de equilibrio la puntuacion de historias (puede haber desequilibrio en numero de historias)
@@ -158,37 +153,35 @@ public class ProyectoAsignacionDesarrolladores {
             this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, this.proyecto.costoPromedio, "c" + i));
 
         }
-*/
-        
-       //se adicionan las restricciones de equilibrio en el numero de historias
-       
-        double[]  coeficientesRestriccion = new double[this.proyecto.numeroDesarroladores * this.proyecto.numeroHistorias];
+         */
+
+        //se adicionan las restricciones de equilibrio en el numero de historias
+        double[] coeficientesRestriccion = new double[this.proyecto.numeroDesarroladores * this.proyecto.numeroHistorias];
         for (int i = 0; i < this.proyecto.numeroDesarroladores; i++) {
             coeficientesRestriccion = new double[this.proyecto.numeroDesarroladores * this.proyecto.numeroHistorias];
             for (int j = 0; j < this.proyecto.numeroHistorias; j++) {
                 coeficientesRestriccion[i * this.proyecto.numeroHistorias + j] = 1;
             }
-           // System.out.println(Arrays.toString(coeficientesRestriccion));
-           // System.out.println(Arrays.toString(coeficientesRestriccion));
-            this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, Math.ceil((double) this.proyecto.numeroHistorias/(double) this.proyecto.numeroDesarroladores), "c" + i));
+            this.linearProgram.addConstraint(new LinearSmallerThanEqualsConstraint(coeficientesRestriccion, Math.ceil((double) this.proyecto.numeroHistorias / (double) this.proyecto.numeroDesarroladores), "c" + i));
 
         }
+
+        //Se adicionan las restricciones que indican que todas las historias deben ser asignadas
         coeficientesRestriccion = new double[this.proyecto.numeroDesarroladores * this.proyecto.numeroHistorias];
         for (int i = 0; i < this.proyecto.numeroHistorias; i++) {
             coeficientesRestriccion = new double[this.proyecto.numeroDesarroladores * this.proyecto.numeroHistorias];
-            for (int j = 0; j <this.proyecto.numeroDesarroladores ; j++) {
+            for (int j = 0; j < this.proyecto.numeroDesarroladores; j++) {
                 coeficientesRestriccion[i + this.proyecto.numeroHistorias * j] = 1;
             }
-          //  System.out.println(Arrays.toString(coeficientesRestriccion));
-           // System.out.println(Arrays.toString(coeficientesRestriccion));
-            this.linearProgram.addConstraint(new LinearEqualsConstraint(coeficientesRestriccion,1, "c" + i));
-          
+            //  System.out.println(Arrays.toString(coeficientesRestriccion));
+            // System.out.println(Arrays.toString(coeficientesRestriccion));
+            this.linearProgram.addConstraint(new LinearEqualsConstraint(coeficientesRestriccion, 1, "c" + i));
+
         }
-        
+
         // se adicionan las restricciones de una unica asignacion de historia (una historia no puede ser 
         //respuesta por dos desarrolladores
-        
-      /*
+        /*
 
         // se adicionan las restricciones para asegurar que no se supera capacidad de los contenedores
         double[] coeficientesRestriccion = new double[cantidadVariables];
@@ -221,53 +214,26 @@ public class ProyectoAsignacionDesarrolladores {
         
         this.linearProgram.addConstraint(new LinearBiggerThanEqualsConstraint(coeficientesRestriccion, 0, "positivos inc el 0"));
         
-        */
-
+         */
     }
 
-    /**
-     * @param mejorNEncontrado Una cantidad n de contenedores que soluciona al
-     * problea Preferiblemente deberia ser un n lo mas cercano posible a la
-     * solucion optima
-     *
-     */
     public void crearFuncionObjetivo() {
-        
+
         double[] coeficientesFuncionObjetivo = this.proyecto.retornarArrayCostos();
-         double[] lowerBound = new double[coeficientesFuncionObjetivo.length];
+        double[] lowerBound = new double[coeficientesFuncionObjetivo.length];
         double[] upperBound = new double[coeficientesFuncionObjetivo.length];
         boolean[] restriccionTodosEnteros = new boolean[coeficientesFuncionObjetivo.length];
-         linearProgram = new LinearProgram(coeficientesFuncionObjetivo);
-         for(int i = 0; i < coeficientesFuncionObjetivo.length; i++){
-             lowerBound[i] = 0;
-             upperBound[i] = 1;
-             restriccionTodosEnteros[i] = true;
-         }
-         System.out.println(coeficientesFuncionObjetivo.length);
+        linearProgram = new LinearProgram(coeficientesFuncionObjetivo);
+        for (int i = 0; i < coeficientesFuncionObjetivo.length; i++) {
+            lowerBound[i] = 0;
+            upperBound[i] = 1;
+            restriccionTodosEnteros[i] = true;
+        }
+        System.out.println(coeficientesFuncionObjetivo.length);
         linearProgram.setIsinteger(restriccionTodosEnteros);
-       
 
         linearProgram.setLowerbound(lowerBound);
         linearProgram.setUpperbound(upperBound);
-       /* double[] coeficientesFuncionObjetivo = new double[cantidadPedidos() * mejorNEncontrado];
-        double[] lowerBound = new double[cantidadPedidos() * mejorNEncontrado];
-        boolean[] restriccionTodosEnteros = new boolean[cantidadPedidos() * mejorNEncontrado];
-        for (int i = 0; i < coeficientesFuncionObjetivo.length; i ++) {
-            coeficientesFuncionObjetivo[i] = -( ((int) Math.floor(i / cantidadPedidos()) ) + 1);
-            
-            restriccionTodosEnteros[i] = true;
-             lowerBound[i] = 0;
-        }
-        
-        System.out.println(Arrays.toString(coeficientesFuncionObjetivo));
-
-      //  System.out.println(Arrays.toString(coeficientesFuncionObjetivo));
-      //la funcion objetivo es minimizar el uso de contenedores 
-        linearProgram = new LinearProgram(coeficientesFuncionObjetivo);
-        linearProgram.setIsinteger(restriccionTodosEnteros);
-        linearProgram.setLowerbound(lowerBound);*/
-
-        //cada 
     }
 
 }

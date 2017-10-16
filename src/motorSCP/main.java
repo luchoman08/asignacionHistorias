@@ -34,13 +34,9 @@ public class main {
        // proyecto.printEntrada();
         proyecto.crearFuncionObjetivo();
         proyecto.adicionarRestricciones();
-      //  System.err.println(proyecto.getTotalArticulosSolicitados());
-       // proyecto.traducirResultados(proyecto.obtenerResultado(), proyecto.getTotalArticulosSolicitados());
-      // proyecto.printMatrix(proyecto.proyecto.matriz_costos);
-     //  System.out.println(Arrays.toString(proyecto.proyecto.retornarArrayCostos()));
-     System.out.println("habilidad promedio: " + proyecto.proyecto.habilidadPromedio);
+        System.out.println("habilidad promedio: " + proyecto.proyecto.habilidadPromedio);
         System.out.println("costo promedio: " + proyecto.proyecto.costoPromedio);
         System.out.println(Arrays.toString(proyecto.obtenerResultado()));
-         proyecto.traducirResultados(proyecto.obtenerResultado());
+        proyecto.traducirResultados(proyecto.obtenerResultado());
     }
 }
